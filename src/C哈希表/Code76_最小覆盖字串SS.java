@@ -1,10 +1,12 @@
 package C哈希表;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 /**
+ * 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。
+ * 如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+ *
+ * 输入：s = "ADOBECODEBANC", t = "ABC"
+ * 输出："BANC"
+ *
  * @author 松鼠
  * @data 2021/12/20 15:38
  */
@@ -53,12 +55,7 @@ public class Code76_最小覆盖字串SS {
             }
             right ++;
         }
-
         return res == Integer.MAX_VALUE ? "" : s.substring(start,start + res);
-
-
-
-
 
     }
 
