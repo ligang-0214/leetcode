@@ -27,7 +27,7 @@ public class Code316_去除重复字母 {
      */
     public static String removeDuplicateLetters(String s) {
         int[] flag = new int[26]; //记录某个字母是否已经在单调栈中
-        int[] count = new int[26]; // 记录某个字母出现的数量  如果某个数就出现一次 那无论怎么样 它只能放进去了
+        int[] count = new int[26]; // 记录某个字母出现的数量
         LinkedList<Character> stack = new LinkedList<>();
         //计算出现的次数
         for (int i = 0; i < s.length(); i++) {
