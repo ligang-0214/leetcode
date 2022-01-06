@@ -32,7 +32,7 @@ public class Code79_单词搜索 {
      * @return
      */
     private boolean backtracking(char[][] board, String word, int i, int j, boolean[][] visited, int index) {
-        if(i >= board[0].length || i < 0 || j >= board.length || j <0 )
+        if(i >= board.length || i < 0 || j >= board[0].length || j <0 )
             return false;
         if(visited[i][j] == true) //有可能往回走或者走到了已经走过的地方 这里处理一下
             return false;
