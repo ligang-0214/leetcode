@@ -1,40 +1,36 @@
-package F栈;
+package I贪心算法;
 
 import java.util.LinkedList;
 
 /**
  * @author 松鼠
- * @data 2021/12/27 17:17
+ * @data 2022/1/7 14:15
  */
 public class Code402_移掉K位数字 {
-    public void main(String[] args) {
 
-    }
-
+    // 这题之前写过  用栈来处理  现在想想好像确实是用到贪心的思想
     public String removeKdigits(String num, int k) {
         if(num.length() == k)
             return "0";
 
-        StringBuffer res = new StringBuffer();
-
-        //处理波峰
-        LinkedList<Character> linkedList = new LinkedList<>();
+        LinkedList<Character> list = new LinkedList<>();
         for (int i = 0; i < num.length(); i++) {
-            while (linkedList.size() > 0 && linkedList.getLast() > num.charAt(i) && k > 0){
-                linkedList.removeLast();
+            while (!list.isEmpty() && num.charAt(i) < list.getLast() && k > 0 ){
                 k--;
+                list.removeLast();
             }
-            linkedList.addLast(num.charAt(i));
+            list.add(num.charAt(i));
         }
-        //如果到最后k还是大于0  还有未处理完的
+
         while (k > 0){
-            linkedList.removeLast();
+            list.removeLast();
             k--;
         }
 
+        StringBuffer res = new StringBuffer();
         //处理前面的0
         Boolean flag = true;
-        for (Character character : linkedList) {
+        for (Character character : list) {
             if(flag && character == '0'){
                 continue;
             }
@@ -43,5 +39,7 @@ public class Code402_移掉K位数字 {
         }
 
         return res.length()==0 ? "0" : res.toString();
+
     }
+
 }
