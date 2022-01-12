@@ -6,6 +6,7 @@ package J动态规划;
  */
 public class Code63_不同路径二 {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        //上来第一个就是0  确实是自己疏忽了
         if(obstacleGrid[0][0] == 1){
             return 0;
         }
