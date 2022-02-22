@@ -15,7 +15,7 @@ public class Code96_不同的二叉搜索树 {
         dp[1] = 1;
         for (int i = 2; i < n + 1; i++) {
             for (int j = 0; j < i; j++) {
-                dp[i] += dp[j] * dp[i - 1 - j];
+                dp[i] += dp[j] * dp[i - 1 - j]; //这里为什么是乘 j有n种 i - 1 - j 有m种  组合方式就是n*m
             }
         }
         return dp[n];
