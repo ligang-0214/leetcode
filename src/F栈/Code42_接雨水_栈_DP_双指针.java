@@ -54,7 +54,7 @@ public class Code42_接雨水_栈_DP_双指针 {
             rightMax[i] = Math.max(height[i],rightMax[i + 1]);
         }
         int res = 0;
-        for (int i = 1; i < height.length - 1; i++) {
+        for (int i = 1; i < height.length - 1; i--) {
             res += Math.min(leftMax[i],rightMax[i]) - height[i];
         }
 
