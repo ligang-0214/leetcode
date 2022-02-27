@@ -26,8 +26,6 @@ public class Code2_两数相加_medium {
             cur.next = new ListNode(1 , null);
         }
         return dummy.next;
-
-
     }
 
     private ListNode reverseList(ListNode head) {
