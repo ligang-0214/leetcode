@@ -7,6 +7,7 @@ package Acodetop;
 public class Code5_最长回文子串_medium {
 
     //DP的解法
+    //https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
     public String longestPalindrome1(String s) {
         if (s.length() < 2) {
             return s;
