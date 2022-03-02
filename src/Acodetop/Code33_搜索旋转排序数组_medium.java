@@ -12,7 +12,7 @@ public class Code33_搜索旋转排序数组_medium {
     }
 
 
-    //二分查找
+    //二分查找  跟153有点类似
     public static int search(int[] nums, int target) {
         int length = nums.length;
         if (length == 1) {
