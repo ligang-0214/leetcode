@@ -17,9 +17,6 @@ public class Code56_合并区间_medium {
                 {15,18}
         };
         merge(intervals);
-
-
-
     }
 
     public static int[][] merge(int[][] intervals) {

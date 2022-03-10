@@ -1,5 +1,7 @@
 package Acodetop;
 
+import java.util.Random;
+
 /**
  * @author 松鼠
  * @data 2022/2/21 15:33
@@ -15,7 +17,8 @@ public class Code912_手撕快排_medium {
 
     private static void quickSort(int[] arr, int l, int r) {
         if(l < r){
-            swap(arr,l + (int)Math.random()*(r-l+1), r);
+//            swap(arr,l + (int)Math.random()*(r-l+1), r);
+            swap(arr, l + new Random().nextInt(r-l), r);
             int[] leftAndRightIndex = partition(arr , l , r);
             quickSort(arr , l , leftAndRightIndex[0] - 1);
             quickSort(arr , leftAndRightIndex[1] + 1 , r);
