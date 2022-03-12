@@ -48,12 +48,7 @@ public class Code23_合并K个升序链表_hard {
             return null;
         }
 
-        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode o1, ListNode o2) {
-                return o1.val - o2.val;
-            }
-        });
+        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>();
 
         //把每条链表的第一个元素加入到小根堆中
         for (int i = 0; i < lists.length; i++) {
