@@ -1,17 +1,18 @@
-package H回溯;
+package Acodetop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/1/5 15:11
+ * @data 2022/3/18 18:25
  */
-public class Code491_递增子序列 {
+public class Code491_递增子序列_medium {
 
-    List<Integer> path = new ArrayList<>();
-    List<List<Integer>> res = new ArrayList<>();
+    private List<Integer> path = new ArrayList<>();
+    private List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> findSubsequences(int[] nums) {
         backtracking(nums,0);
         return res;
@@ -32,4 +33,5 @@ public class Code491_递增子序列 {
             path.remove(path.size() - 1);
         }
     }
+
 }
