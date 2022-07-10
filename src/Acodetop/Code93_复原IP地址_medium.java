@@ -42,7 +42,7 @@ public class Code93_复原IP地址_medium {
             return;
         }
 
-        for (int i = startIndex; i < s.length(); i++) {
+        for (int i = startIndex; i <= startIndex + 2 && i < s.length(); i++) {
             if(checkRight(s, startIndex , i)){
                 temp.addLast(s.substring(startIndex , i+1));
                 temp.addLast(".");

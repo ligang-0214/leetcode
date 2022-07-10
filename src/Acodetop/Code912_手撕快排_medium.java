@@ -1,5 +1,6 @@
 package Acodetop;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -7,38 +8,43 @@ import java.util.Random;
  * @data 2022/2/21 15:33
  */
 public class Code912_手撕快排_medium {
-
-    public static void quickSort(int[] arr) {
-        if (arr == null || arr.length < 2) {
-            return;
-        }
-        quickSort(arr, 0, arr.length - 1);
+    public static void main(String[] args) {
+        int[] arr = {5, 4, 2, 1, 6, 4, 7, 8, 3, 9, 4};
+        sortArray(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
-    private static void quickSort(int[] arr, int l, int r) {
-        if(l < r){
-//            swap(arr,l + (int)Math.random()*(r-l+1), r);
-            swap(arr, l + new Random().nextInt(r-l), r);
-            int[] leftAndRightIndex = partition(arr , l , r);
-            quickSort(arr , l , leftAndRightIndex[0] - 1);
-            quickSort(arr , leftAndRightIndex[1] + 1 , r);
+    public static int[] sortArray(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return nums;
+        }
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private static void quickSort(int[] nums, int l, int r) {
+        if (l < r) {
+            swap(nums, l + new Random().nextInt(r - l), r);
+            int[] leftAndRightIndex = partition(nums, l, r);
+            quickSort(nums, l, leftAndRightIndex[0] - 1);
+            quickSort(nums, leftAndRightIndex[1] + 1, r);
         }
     }
 
     private static int[] partition(int[] arr, int l, int r) {
         int lFlag = l - 1;
         int rFlag = r;
-        while (l < rFlag){
-            if(arr[l] < arr[r]){
-                swap(arr,++lFlag,l++);
-            }else if(arr[l] > arr[r]){
-                swap(arr , l , --rFlag);
-            }else {
+        while (l < rFlag) {
+            if (arr[l] < arr[r]) {
+                swap(arr, ++lFlag, l++);
+            } else if (arr[l] > arr[r]) {
+                swap(arr, l, --rFlag);
+            } else {
                 l++;
             }
         }
-        swap(arr,rFlag,r);
-        return new int[]{l , rFlag};
+        swap(arr, rFlag, r);
+        return new int[]{lFlag + 1, rFlag};
     }
 
 

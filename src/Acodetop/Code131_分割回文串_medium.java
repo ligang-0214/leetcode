@@ -6,42 +6,70 @@ import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/3/18 16:20
+ * @data 2022/7/9 21:57
  */
 public class Code131_分割回文串_medium {
 
+    //https://leetcode.cn/problems/palindrome-partitioning/solution/hui-su-you-hua-jia-liao-dong-tai-gui-hua-by-liweiw/
+    // 可以用 dp 优化判断回文字符串  降低时间复杂度
     List<List<String>> res = new ArrayList<>();
     LinkedList<String> temp = new LinkedList<>();
 
     public List<List<String>> partition(String s) {
-        backtracking(s, 0);
+        if (s == null || s.length() == 0) {
+            return res;
+        }
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for (int right = 0; right < s.length(); right++) {
+            for (int left = 0; left <= right; left++) {
+                if(s.charAt(left) == s.charAt(right) && ( right - left <= 2 ||  dp[left + 1][right - 1])){
+                    dp[left][right] = true;
+                }
+            }
+        }
+
+//        backtracking1(s, 0);
+        backtracking2(s, 0 , dp);
         return res;
     }
 
-    private void backtracking(String s, int curIndex) {
-        if (curIndex == s.length()) {
+    private void backtracking2(String s, int index, boolean[][] dp) {
+        if (index == s.length()) {
             res.add(new ArrayList<>(temp));
             return;
         }
-        for (int i = curIndex; i < s.length(); i++) {
-            if (isPalindrome(s, curIndex, i)) {
-                temp.addLast(s.substring(curIndex, i + 1));
-            } else {
-                continue; //这个continue 挺重要的
+        for (int i = index; i < s.length(); i++) {
+            if(dp[index][i]){
+                temp.add(s.substring(index, i + 1));
+                backtracking2(s, i + 1 , dp);
+                temp.removeLast();
             }
-            backtracking(s, i + 1);
-            temp.removeLast();
         }
-
-
     }
 
-    private boolean isPalindrome(String s, int startIndex, int end) {
-        while (startIndex < end) {
-            if (s.charAt(startIndex) != s.charAt(end))
+    private void backtracking1(String s, int index) {
+        if (index == s.length()) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = index; i < s.length(); i++) {
+            if (isHuiWenString(s, index, i)) {
+                temp.add(s.substring(index, i + 1));
+            } else {
+                continue;
+            }
+            backtracking1(s, i + 1);
+            temp.removeLast();
+        }
+    }
+
+    private boolean isHuiWenString(String s, int left, int right) {
+        while (left < right){
+            if(s.charAt(left) != s.charAt(right)){
                 return false;
-            startIndex++;
-            end--;
+            }
+            left++;
+            right--;
         }
         return true;
     }

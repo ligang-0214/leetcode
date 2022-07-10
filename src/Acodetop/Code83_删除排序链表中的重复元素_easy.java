@@ -7,18 +7,15 @@ package Acodetop;
 public class Code83_删除排序链表中的重复元素_easy {
 
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null){
-            return null;
-        }
-
         ListNode dummy = new ListNode(-1, head);
-        while (head != null){
-            ListNode temp = head.next;
-            while (temp != null && temp.val == head.val){
+        ListNode cur = head;
+        while (cur != null){
+            ListNode temp = cur.next;
+            while (temp != null && temp.val == cur.val){
                 temp = temp.next;
             }
-            head.next = temp;
-            head = temp;
+            cur.next = temp;
+            cur = temp;
         }
         return dummy.next;
     }

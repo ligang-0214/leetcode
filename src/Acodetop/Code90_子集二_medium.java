@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class Code90_子集二_medium {
 
-    //处理重复有点小技巧
+    // 处理重复有点小技巧
+    // 我在 APractice 包下面写的解法是不需要标记数组的  直接判断  简直太好用了和40题一样处理的
     List<List<Integer>> res = new ArrayList<>();
     LinkedList<Integer> temp = new LinkedList<>();
     boolean[] used;

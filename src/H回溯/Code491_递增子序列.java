@@ -1,6 +1,7 @@
 package H回溯;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,26 +11,40 @@ import java.util.List;
  */
 public class Code491_递增子序列 {
 
-    List<Integer> path = new ArrayList<>();
     List<List<Integer>> res = new ArrayList<>();
+    LinkedList<Integer> temp = new LinkedList<>();
+
     public List<List<Integer>> findSubsequences(int[] nums) {
-        backtracking(nums,0);
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        backtracking(nums, 0);
         return res;
     }
 
-    private void backtracking (int[] nums, int start) {
-        if (path.size() > 1) {
-            res.add(new ArrayList<>(path));
+    private void backtracking(int[] nums, int index) {
+        if (temp.size() >= 2) {
+            res.add(new ArrayList<>(temp));
+        }
+        if (index >= nums.length) {
+            return;
         }
 
-        int[] used = new int[201];
-        for (int i = start; i < nums.length; i++) {
-            if (!path.isEmpty() && nums[i] < path.get(path.size() - 1) ||
-                    (used[nums[i] + 100] == 1)) continue;
-            used[nums[i] + 100] = 1;
-            path.add(nums[i]);
+        // carl使用的整型数组  我还是觉得set好用
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = index; i < nums.length; i++) {
+            // 这题还真不能用这个方式去重  因为nums不是有序的  例如4、6、7、7、7、8、7、7 就会出错
+//            if (i > index && nums[i] == nums[i - 1] ) {
+//                continue;
+//            }
+
+            if ((!temp.isEmpty() && nums[i] < temp.getLast()) || set.contains(nums[i])) {
+                continue;
+            }
+            temp.add(nums[i]);
+            set.add(nums[i]);
             backtracking(nums, i + 1);
-            path.remove(path.size() - 1);
+            temp.removeLast();
         }
     }
 }

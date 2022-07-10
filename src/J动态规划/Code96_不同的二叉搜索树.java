@@ -6,6 +6,7 @@ package J动态规划;
  */
 public class Code96_不同的二叉搜索树 {
     //这题真的是绝了  第一次做的话  绝对死翘翘
+    //carl的解析特别好（动规第9题）
     public int numTrees(int n) {
         if (n == 1) {
             return 1;

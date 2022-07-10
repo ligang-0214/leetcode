@@ -11,33 +11,42 @@ import java.util.List;
  */
 public class Code40_组合总和二_medium {
 
+//https://leetcode.cn/problems/combination-sum-ii/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-3/
     List<List<Integer>> res = new ArrayList<>();
     LinkedList<Integer> temp = new LinkedList<>();
-    int sum = 0;
+
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
-        if(candidates[0] > target){
+        if (candidates == null || candidates.length == 0 || candidates[0] > target) {
             return res;
         }
-        backtracking(candidates , target , 0);
+        backtracking(candidates, target, 0, 0);
         return res;
     }
 
-    private void backtracking(int[] candidates, int target, int curIndex) {
-        if(sum == target){
+    private void backtracking(int[] candidates, int target, int index, int sum) {
+        if (sum > target)
+            return;
+        if (sum == target) {
             res.add(new ArrayList<>(temp));
             return;
         }
-        if(sum > target)
-            return;
-        for (int i = curIndex; i < candidates.length; i++) {
-            sum += candidates[i];
-            temp.addLast(candidates[i]);
-            backtracking(candidates , target , i+1);
-            sum -= candidates[i];
+
+        for (int i = index; i < candidates.length; i++) {
+            //和39题一样 这里先剪枝
+            if (sum + candidates[i] > target)
+                break;
+            //这里的去重可以多思考一下  很巧妙  不需要标记数组
+            if (i > index && candidates[i] == candidates[i - 1])
+                continue;
+            temp.add(candidates[i]);
+            backtracking(candidates, target, i + 1, sum + candidates[i]);
             temp.removeLast();
-            while ( i + 1 < candidates.length && candidates[i] == candidates[i+1])
-                i++;
+
+            //这个和上面的去重效果一样
+//            while( i + 1 < candidates.length && candidates[i] == candidates[i + 1]){
+//                i++;
+//            }
         }
     }
 

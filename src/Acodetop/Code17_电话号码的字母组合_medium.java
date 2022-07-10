@@ -12,11 +12,12 @@ public class Code17_电话号码的字母组合_medium {
 
     List<String> res = new ArrayList<>();
     StringBuffer temp = new StringBuffer();
+
     public List<String> letterCombinations(String digits) {
-        if(digits == null || digits.length() == 0){
+        if (digits == null || digits.length() == 0) {
             return res;
         }
-        String[] numString = {
+        String[] flag = new String[]{
                 "", //0
                 "", //1
                 "abc", //2
@@ -29,19 +30,19 @@ public class Code17_电话号码的字母组合_medium {
                 "wxyz" //9
         };
 
-        char[] chars = digits.toCharArray();
-        backtracking(chars , 0 , numString);
+        backtracking(flag, 0, digits);
         return res;
     }
 
-    private void backtracking(char[] chars, int cur , String[] numString) {
-        if(temp.length() == chars.length){
+    private void backtracking(String[] flag, int curIndex, String digits) {
+        if (temp.length() == digits.length()) {
             res.add(new String(temp));
             return;
         }
-        for (int i = 0; i < numString[chars[cur] - '0'].length(); i++) {
-            temp.append(numString[chars[cur] - '0'].charAt(i));
-            backtracking(chars , cur + 1 , numString);
+        String str = flag[digits.charAt(curIndex) - '0'];
+        for (int i = 0; i < str.length(); i++) {
+            temp.append(str.charAt(i));
+            backtracking(flag, curIndex + 1, digits);
             temp.deleteCharAt(temp.length() - 1);
         }
     }

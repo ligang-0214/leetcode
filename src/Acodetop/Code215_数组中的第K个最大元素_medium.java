@@ -60,7 +60,7 @@ public class Code215_数组中的第K个最大元素_medium {
             }
         }
         swap(nums,rFlag,r);
-        return new int[]{l , rFlag};
+        return new int[]{lFlag + 1 , rFlag};
     }
 
     private static void swap(int[] arr, int index1, int index2) {

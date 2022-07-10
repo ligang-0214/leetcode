@@ -23,13 +23,6 @@ public class Code79_单词搜索 {
 
     /**
      * 这个有点像之前什么 挖矿工  机器人走棋盘  之类的  看提交的效果还不错  就没看其他解法
-     * @param board
-     * @param word
-     * @param i
-     * @param j
-     * @param visited
-     * @param index
-     * @return
      */
     private boolean backtracking(char[][] board, String word, int i, int j, boolean[][] visited, int index) {
         if(i >= board.length || i < 0 || j >= board[0].length || j <0 )

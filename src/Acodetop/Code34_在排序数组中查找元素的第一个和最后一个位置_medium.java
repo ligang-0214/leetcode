@@ -13,7 +13,7 @@ public class Code34_在排序数组中查找元素的第一个和最后一个位
             return res;
         int left = 0;
         int right = nums.length -1;
-        while (left <= right){
+        while (left <= right){ //这里要加 =  否则 用例：[1]   1   无法通过
             int mid = left + (right - left)/2;
             if(nums[mid] == target){
                 int leftIndex = mid;

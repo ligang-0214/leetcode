@@ -7,27 +7,22 @@ package Acodetop;
 public class Code82_删除排序链表中的重复元素二_medium {
 
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        ListNode newHead = new ListNode(-1, head);
-        ListNode pre = newHead;
-        while (head != null && head.next != null) {
-            ListNode nextNode = head.next;
-            int flag = 0;
-            while (nextNode != null && nextNode.val == head.val) {
-                flag = 1;
-                nextNode = nextNode.next;
-            }
-            if (flag == 1) {
-                pre.next = nextNode;
-                head = nextNode;
-            } else {
-                pre = head;
-                head = head.next;
+        ListNode dummy = new ListNode(-1, head);
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while (cur != null && cur.next != null){
+            if(cur.val != cur.next.val){
+                pre = cur;
+                cur = cur.next;
+            }else {
+                while (cur != null && cur.next != null && cur.val == cur.next.val){
+                    cur = cur.next;
+                }
+                pre.next = cur.next;
+                cur = pre.next;
             }
         }
-        return newHead.next;
+        return dummy.next;
 
 
     }

@@ -72,17 +72,16 @@ public class Code148_排序链表_medium {
     }
 
     public ListNode sortList2(ListNode head){
-
         if(head == null){
             return null;
         }
-
-        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode o1, ListNode o2) {
-                return o1.val - o2.val;
-            }
-        });
+//        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(new Comparator<ListNode>() {
+//            @Override
+//            public int compare(ListNode o1, ListNode o2) {
+//                return o1.val - o2.val;
+//            }
+//        });
+        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>((o1 , o2)->{return o1.val - o2.val;});
         while (head != null){ //注意把每个节点都断开  否则最后连一起之后 可能会出现循环链表
             priorityQueue.add(head);
             ListNode temp = head.next;
@@ -98,8 +97,6 @@ public class Code148_排序链表_medium {
             cur = poll;
         }
         return dummy.next;
-
-
     }
 
 
