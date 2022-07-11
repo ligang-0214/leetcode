@@ -1,27 +1,26 @@
-package Acodetop;
+package APractice;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/2/22 8:55
+ * @data 2022/7/11 10:30
  */
-public class Code102_二叉树的层序遍历_medium {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
+public class Code104_二叉树的最大深度_easy {
+
+    // 广度优先遍历  BFS
+    public int maxDepth1(TreeNode root) {
         LinkedList<TreeNode> linkedList = new LinkedList<>();
+        int res = 0;
         if (root == null) {
             return res;
         }
         linkedList.addLast(root);
         while (!linkedList.isEmpty()) {
+            res++;
             int size = linkedList.size();
-            ArrayList<Integer> temp = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode node = linkedList.removeFirst();
-                temp.add(node.val);
                 if (node.left != null) {
                     linkedList.addLast(node.left);
                 }
@@ -29,9 +28,23 @@ public class Code102_二叉树的层序遍历_medium {
                     linkedList.addLast(node.right);
                 }
             }
-            res.add(temp);
         }
         return res;
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------
+     */
+
+    // 深度优先遍历  DFS
+    public int maxDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = maxDepth2(root.left);
+        int right = maxDepth2(root.right);
+        return Math.max(left, right) + 1;
     }
 
 }

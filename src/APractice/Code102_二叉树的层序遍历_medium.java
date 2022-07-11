@@ -1,4 +1,4 @@
-package Acodetop;
+package APractice;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,9 +6,10 @@ import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/2/22 8:55
+ * @data 2022/7/11 9:26
  */
 public class Code102_二叉树的层序遍历_medium {
+
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         LinkedList<TreeNode> linkedList = new LinkedList<>();

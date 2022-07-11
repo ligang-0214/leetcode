@@ -6,11 +6,12 @@ import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/2/22 8:55
+ * @data 2022/7/11 10:15
  */
-public class Code102_二叉树的层序遍历_medium {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
+public class Code515_在每棵树行中找最大值_medium {
+
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
         LinkedList<TreeNode> linkedList = new LinkedList<>();
         if (root == null) {
             return res;
@@ -18,10 +19,10 @@ public class Code102_二叉树的层序遍历_medium {
         linkedList.addLast(root);
         while (!linkedList.isEmpty()) {
             int size = linkedList.size();
-            ArrayList<Integer> temp = new ArrayList<>();
+            int max = Integer.MIN_VALUE;
             for (int i = 0; i < size; i++) {
                 TreeNode node = linkedList.removeFirst();
-                temp.add(node.val);
+                max = Math.max(max , node.val);
                 if (node.left != null) {
                     linkedList.addLast(node.left);
                 }
@@ -29,7 +30,7 @@ public class Code102_二叉树的层序遍历_medium {
                     linkedList.addLast(node.right);
                 }
             }
-            res.add(temp);
+            res.add(max);
         }
         return res;
     }

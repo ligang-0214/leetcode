@@ -1,16 +1,18 @@
 package Acodetop;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author 松鼠
- * @data 2022/2/22 8:55
+ * @data 2022/7/11 9:42
  */
-public class Code102_二叉树的层序遍历_medium {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
+public class Code107_二叉树的层序遍历二_medium {
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
         LinkedList<TreeNode> linkedList = new LinkedList<>();
         if (root == null) {
             return res;
@@ -31,6 +33,7 @@ public class Code102_二叉树的层序遍历_medium {
             }
             res.add(temp);
         }
+        Collections.reverse(res);
         return res;
     }
 
