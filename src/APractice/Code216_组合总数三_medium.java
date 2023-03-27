@@ -19,18 +19,19 @@ public class Code216_组合总数三_medium {
     }
 
     private void backtracking(int k, int n, int sum, int index) {
-        if (sum > n || temp.size() > k)
+        if (sum > n || temp.size() > k) {
             return;
+        }
         if (sum == n && temp.size() == k) {
             res.add(new ArrayList<>(temp));
             return;
         }
-        for (int i = index; i <= 9; i++) {
+
+        for (int i = index; i < 10; i++) {
             temp.addLast(i);
             backtracking(k, n, sum + i, i + 1);
             temp.removeLast();
         }
-
     }
 
 }

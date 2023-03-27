@@ -6,50 +6,33 @@ package Acodetop;
  */
 public class Code5_最长回文子串_medium {
 
-    //DP的解法
+    //DP的解法  下面是我自己的解法   连接中是另外的一种   我觉得还是我这种好理解
     //https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
     public String longestPalindrome1(String s) {
-        if (s.length() < 2) {
+        int length = s.length();
+        if (length == 1) {
             return s;
         }
-        int length = s.length();
         int[][] dp = new int[length][length];
-
         for (int i = 0; i < length; i++) {
             dp[i][i] = 1;
         }
-
-        int begin = 0;
-        int maxLen = 1;
-
-        //len是枚举子串的长度
-        for (int len = 2; len <= length; len++) {
-            //i是枚举左边界
-            for (int i = 0; i < length; i++) {
-                //j - i + 1 = len   所以  j = len + i - 1   j是右边界
-                //j是右边界
-                int j = len + i - 1;
-                if (j >= length) { //如果右边越界  就退出循环
-                    break;
-                }
-                if (s.charAt(i) != s.charAt(j)) {
-                    dp[i][j] = 0;
-                } else {
-                    if (j - i < 3) { //举了例子画一下 就明白了
-                        dp[i][j] = 1;
-                    } else {
-                        dp[i][j] = dp[i + 1][j - 1];
+        int left = 0;
+        int right = 0;
+        for (int col = 1; col < length; col++) {
+            for (int row = 0; row < col; row++) {
+                if (s.charAt(row) == s.charAt(col) && (col - row <= 2 || dp[row + 1][col - 1] == 1)) {
+                    dp[row][col] = 1;
+                    if (col - row > right - left) {
+                        left = row;
+                        right = col;
                     }
-                }
-                //更新最长子串
-                if (dp[i][j] == 1) {
-                    maxLen = Math.max(maxLen, j - i + 1);
-                    begin = i;
+                } else {
+                    dp[row][col] = 0;
                 }
             }
-
         }
-        return s.substring(begin, begin + maxLen); //包前不包后
+        return s.substring(left, right + 1);
     }
 
     //中心扩展算法【这种才是正常思路】

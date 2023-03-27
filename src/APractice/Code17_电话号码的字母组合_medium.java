@@ -29,22 +29,23 @@ public class Code17_电话号码的字母组合_medium {
                 "tuv", //8
                 "wxyz" //9
         };
-
-        backtracking(flag, 0, digits);
+        backtracking(digits, 0, flag);
         return res;
     }
 
-    private void backtracking(String[] flag, int curIndex, String digits) {
-        if (temp.length() == digits.length()) {
-            res.add(new String(temp));
+    private void backtracking(String digits, int index, String[] flag) {
+        if (index == digits.length()) {
+            res.add(temp.toString());
             return;
         }
-        String str = flag[digits.charAt(curIndex) - '0'];
-        for (int i = 0; i < str.length(); i++) {
-            temp.append(str.charAt(i));
-            backtracking(flag, curIndex + 1, digits);
+
+        int curNum = digits.charAt(index) - '0';
+        for (int i = 0; i < flag[curNum].length(); i++) {
+            temp.append(flag[curNum].charAt(i));
+            backtracking(digits, index + 1, flag);
             temp.deleteCharAt(temp.length() - 1);
         }
     }
+
 
 }

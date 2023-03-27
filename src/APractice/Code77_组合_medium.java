@@ -25,8 +25,8 @@ public class Code77_组合_medium {
             res.add(new ArrayList<>(temp));
             return;
         }
-        for (int i = index; i <= n - (k - temp.size()) + 1; i++) {
-            temp.add(i);
+        for (int i = index; i <= n - k + temp.size() + 1; i++) {
+            temp.addLast(i);
             backtracking(n, i + 1, k);
             temp.removeLast();
         }

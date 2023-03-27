@@ -1,5 +1,7 @@
 package APractice;
 
+import com.sun.org.apache.bcel.internal.generic.FSUB;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,43 +24,45 @@ public class Code93_复原IP地址_medium {
     }
 
     private void backtracking(String s, int index) {
-        if (temp.size() == 4 && index == s.length()) {
-            StringBuffer stringBuffer = new StringBuffer();
-            for (String s1 : temp) {
-                stringBuffer.append(s1 + ".");
+        if (index == s.length() && temp.size() == 8) {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < temp.size() - 1; i++) {
+                buffer.append(temp.get(i));
             }
-            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
-            res.add(stringBuffer.toString());
+            res.add(buffer.toString());
             return;
         }
 
-        //剪枝操作
-        if ((4 - temp.size()) * 3 < s.length() - index) {
-            return;
-        }
-
-        for (int i = index; i <= index + 2 && i < s.length(); i++) {
-            if (checkStr(s, index, i)) {
-                temp.add(s.substring(index, i + 1));
+        for (int i = index; i < s.length(); i++) {
+            if (checkStr(s, index, i + 1)) {
+                temp.addLast(s.substring(index, i + 1));
+                temp.addLast(".");
                 backtracking(s, i + 1);
                 temp.removeLast();
+                temp.removeLast();
+            }else {
+                return;
             }
         }
     }
 
-    private boolean checkStr(String s, int left, int right) {
-        String substring = s.substring(left, right + 1);
-        if (right != left && substring.charAt(0) == '0') {
+    private boolean checkStr(String s, int startIndex, int endIndex) {
+        String substring = s.substring(startIndex, endIndex);
+        //处理前导0的情况
+        if(substring.length() > 1 && substring.charAt(0) == '0'){
             return false;
         }
+        Integer integer = -1;
         try {
-            if (Integer.valueOf(substring) > 255) {
-                return false;
-            }
+            integer = Integer.valueOf(substring);
         } catch (Exception e) {
+            return false;
+        }
+        if (integer <= 0 || integer >= 255) {
             return false;
         }
         return true;
     }
+
 
 }

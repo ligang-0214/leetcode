@@ -12,24 +12,24 @@ public class Code78_子集_medium {
 
     List<List<Integer>> res = new ArrayList<>();
     LinkedList<Integer> temp = new LinkedList<>();
+
     public List<List<Integer>> subsets(int[] nums) {
-        if(nums == null || nums.length == 0){
+        if(nums == null){
             return res;
         }
-        backtracking(nums , 0);
+        backtracking(nums, 0);
         return res;
     }
 
     private void backtracking(int[] nums, int index) {
         res.add(new ArrayList<>(temp));
-        if(index >= nums.length){
-            return;
-        }
+
         for (int i = index; i < nums.length; i++) {
-            temp.add(nums[i]);
-            backtracking(nums , i + 1);
+            temp.addLast(nums[i]);
+            backtracking(nums, i + 1);
             temp.removeLast();
         }
     }
+
 
 }
