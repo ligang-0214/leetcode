@@ -1,6 +1,6 @@
 package B链表;
 
-import com.sun.org.apache.regexp.internal.RE;
+
 
 import java.awt.*;
 
